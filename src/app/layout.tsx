@@ -6,8 +6,19 @@ import { twMerge } from 'tailwind-merge';
 const dmSans = DM_Sans({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: process.env.APP_NAME,
-  description: process.env.APP_DESCRIPTION
+  title: 'App Name',
+  description: 'App Description',
+  openGraph: {
+    title: 'App Name',
+    description: 'App Desciption',
+    url: '/',
+    images: [
+      {
+        url: '/preview.png',
+        alt: 'App Preview'
+      }
+    ]
+  }
 };
 
 export default function RootLayout({

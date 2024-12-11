@@ -6,8 +6,12 @@ import { Section4 } from '@/app/_components/section-4';
 import Footer from '@/app/_components/footer';
 import RunningText from '@/app/_components/running-text';
 import Image from 'next/image';
+import { createClient } from '@/client/supabase/server';
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient();
+  const { data } = await supabase.from('configs').select();
+
   return (
     <main className='w-full h-full relative'>
       <Header />
