@@ -5,7 +5,7 @@ import type { Attachment, Message } from 'ai';
 import { useChat } from 'ai/react';
 import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { MultimodalInput } from './_components/multimodal-input';
+import { MultimodalInput } from './multimodal-input';
 
 export function Chat({
   id,
