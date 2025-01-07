@@ -1,5 +1,6 @@
 import Aos from "@/components/aos";
 import Providers from "@/components/providers";
+import { createClient } from "@/utils/supabase/server";
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import { twMerge } from "tailwind-merge";
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   description: "App Description",
   openGraph: {
     title: "App Name",
-    description: "App Desciption",
+    description: "App Description",
     url: "/",
     images: [
       {
@@ -27,17 +28,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = await createClient();
+  const { data: configs } = await supabase.from("configs").select();
+
   return (
     <>
       <Aos />
       <html lang="en" className="relative">
         <body className={twMerge(dmSans.variable, "font-dm antialiased")}>
-          <Providers>{children}</Providers>
+          <Providers config={configs?.[0] || null}>{children}</Providers>
         </body>
       </html>
     </>
